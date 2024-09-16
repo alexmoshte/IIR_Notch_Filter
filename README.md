@@ -1,2 +1,2 @@
 # IIR-Notch-filter
-IIR Filter MATLAB Simulation and C Implementation using the CMSIS DSP library for STM32 Microcontrollers
+IIR filter MATLAB simulation and C implementation using the CMSIS DSP library for STM32 Multichannel ADCs
