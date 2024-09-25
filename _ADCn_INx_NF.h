@@ -4,9 +4,9 @@
  * Created on: Sep 14, 2024
  * Author: Mwangi Alex. W
  *
- * This header file consists of all the variables and pointers that are to be fed to the CMSIS DSP functions for IIR biquad filter implementation-
- * for a notch filter that attenuates 50hZ powerline interference noise. The variables and pointers are declared in the form of a structure-
- * upon which every member of the struct is accessed as a pointer. That way, the input arguments of the DSP functions are fed as members of a-
+ * This header file consists of all the variables and pointers that are to be fed to the CMSIS DSP functions for IIR biquad filter implementation
+ * for a notch filter that attenuates 50hZ powerline interference noise. The variables and pointers are declared in the form of a structure
+ * upon which every member of the struct is accessed by a pointer. That way, the input arguments of the DSP functions are fed as members of a
  * struct.
  */
 
@@ -20,12 +20,12 @@
 
 //INCLUSIONS
 #include "_DMA_Sort.h" // Header file that caters for the sorting of mixed up channel data from the DMA buffer into buffers that contain the data from respective ADC channels
-#include "arm_math.h" // Header file neccessary for running CMSIS DSP functions
+#include "arm_math.h" // Header file necessary for running CMSIS DSP functions
 
 //STRUCTS, VARIABLES AND POINTERS
 // The struct that holds all the variables and pointers that are needed to to run the biquad DSP function
 
-typedef struct
+typedef struct   // Handles IN1 channel data
 {
 	uint8_t ADC1_IN1_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -49,11 +49,11 @@ typedef struct
 
 } ADC1_IN1_NF;
 
-extern ADC1_IN1_NF ADC1_IN1_NF_arg;
+extern ADC1_IN1_NF ADC1_IN1_NF_arg; // Variable used initialize the struct in the .c file
 
 
 
-typedef struct
+typedef struct  // Handles IN2 channel data
 {
 	uint8_t ADC1_IN2_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -77,10 +77,10 @@ typedef struct
 
 } ADC1_IN2_NF;
 
-extern ADC1_IN2_NF ADC1_IN2_NF_arg;
+extern ADC1_IN2_NF ADC1_IN2_NF_arg;   
 
 
-typedef struct
+typedef struct // Handles IN3 channel data
 {
 	uint8_t ADC2_IN3_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -108,7 +108,7 @@ extern ADC2_IN3_NF ADC2_IN3_NF_arg;
 
 
 
-typedef struct
+typedef struct // Handles IN4 channel data
 {
 	uint8_t ADC2_IN4_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -136,7 +136,7 @@ extern ADC2_IN4_NF ADC2_IN4_NF_arg;
 
 
 
-typedef struct
+typedef struct // Handles IN1 channel data
 {
 	uint8_t ADC3_IN1_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -160,10 +160,10 @@ typedef struct
 
 } ADC3_IN1_NF;
 
-extern ADC3_IN1_NF ADC3_IN1_NF_arg;
+extern ADC3_IN1_NF ADC3_IN1_NF_arg; 
 
 
-typedef struct
+typedef struct // Handles IN2 channel data
 {
 	uint8_t ADC3_IN2_numstages; // The number of biquad stages for the notch filter. One biquad is of the order 2. Using two stages means our filter is of order 4. Declaration with initialization would result in an error
 
@@ -187,14 +187,15 @@ typedef struct
 
 } ADC3_IN2_NF;
 
-extern ADC3_IN2_NF ADC3_IN2_NF_arg;
+extern ADC3_IN2_NF ADC3_IN2_NF_arg; 
 
 //FUNCTION DECLARATIONS
-void init_ADC1_IN1_struct(void);
 
-void init_ADC1_IN1_FO_biquad_filter(void);
+void init_ADC1_IN1_struct(void);  // Function that initializes the pointer to the source buffer at runtime for channel 1
 
-void update_ADC1_IN1_FO_biquad_filter(void);
+void init_ADC1_IN1_FO_biquad_filter(void);  // The CMSIS DSP function that initializes the filter coefficients, variables and buffer sizes before filtering commences for channel 1
+
+void update_ADC1_IN1_FO_biquad_filter(void);  // The optimized CMSIS DSP function that handles all the filtering operations and uploads the updated values to the destination buffers for channel 1
 
 
 void init_ADC1_IN2_struct(void);

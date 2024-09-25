@@ -1,6 +1,6 @@
 
-%% A MATLAB script to design and simulate an IIR notch filter that
-% attenuate 50Hz power line interference for a biosignal acquisition board
+%% A MATLAB script to design and simulate an IIR notch filter that attenuates 50Hz power line interference for a biosignal data acquisition board
+
 %% Frequency and period constants
 T=1.91e-4; % Period of each channel
 fs=1/T; %=5.2355kHz. Frequency of operation for each channel
@@ -13,11 +13,16 @@ Woa=((2/T)*tan((Wd0/2)*T)); %Warped analog filter centre frequency
 %% Lowpass prototype to lowpass analog filter
 [B,A]=lp2bs(1,[1 sqrt(2) 1], Woa, W); %This function converts a lowpass prototype filter to a band stop filter with the warped frequncy specifications.Functions for converting to lowpass, highpass, and bandpass are also available. B and A are the coefficients of the corresponding analog filter laplace transform for our intended digital filter
  
+%% Checking for Stability
+TF=tf(B,A);
+isstable(TF) %Returns logic 1 when the filter is stable. It follows that if the analog corresponding filter is stable, its digital corresponding filter is stable
+
 %% Bilinear transform 
 disp('Numerator coefficients b and Denominator coefficients a of the 4th order digital notch filter Z-tranform:');
 [b,a]=bilinear(B,A,fs);%Implements a bilinear transform using B and A. b and a are the coefficients of the intended digital filter z-transform
 disp(['b: ', num2str(b)]);
 disp(['a: ', num2str(a)]);
+
 %% Frequency response plots (magnitude and phase)
 [hz, f]=freqz(b,a,512,fs); % Computes the frequency and phase response of the filter
 magdB=20*log10(abs(hz)); %Converting magnitude to dB attenuation or gain. +ve dB=gain while -ve dB=atenuation
@@ -33,15 +38,6 @@ axis([0 fs/2-100 0]); % Adjusting view according to filter characteristics
 xlabel('Frequency (Hz)')
 ylabel('Phase (degrees)')
 title('Phase Response')
-
-%% Converts the simulation .fig plot to a .png file
-
-% Step 1: Open the .fig file
-fig = openfig('Notchfiltersim.fig', 'invisible'); 
-
-% Step 2: Save the figure as a .png file with specified resolution
-exportgraphics(fig, 'Notchfiltersim.png', 'Resolution', 300); % 300 dpi for high-quality output
-
 
 %% Partial fractions for determining the difference equation (not important)
 [R,P,K]=residue(b,a);

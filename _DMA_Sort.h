@@ -4,7 +4,7 @@
  *  Created on: Sep 14, 2024
  *  Author: Mwangi Alex. W
  *
- *  This header file holds all the variables and buffers within a struct that are neccessary to implement the sorting alogorithm and all fucnction declarations
+ *  This header file holds all the variables and buffers within a struct that are neccessary to implement the sorting algorithm and all fucnction declarations
  *  for the same algorithm. The sorting algorithm is responsible for scanning the DMA buffer that stores data for all channels (IN1 and IN2 for ADC1 and ADC3.
  *  IN3 and IN4 for ADC2) loading each value from the buffer and storing it in buffers that now hold data for respective channels
  */
@@ -37,7 +37,7 @@ typedef struct //Struct for ADC1
 
 } ADC1_DMA_sort;
 
-extern ADC1_DMA_sort*ADC1_DMA_sort_ptr;
+extern ADC1_DMA_sort*ADC1_DMA_sort_ptr;  // Pointer to the struct
 
 
 typedef struct //Struct for ADC2
@@ -53,7 +53,7 @@ typedef struct //Struct for ADC2
 
 } ADC2_DMA_sort;
 
-extern ADC2_DMA_sort*ADC2_DMA_sort_ptr;
+extern ADC2_DMA_sort*ADC2_DMA_sort_ptr;  // Pointer to the struct
 
 
 typedef struct //Struct for ADC3
@@ -69,7 +69,7 @@ typedef struct //Struct for ADC3
 
 } ADC3_DMA_sort;
 
-extern ADC3_DMA_sort*ADC3_DMA_sort_ptr;
+extern ADC3_DMA_sort*ADC3_DMA_sort_ptr;  // Pointer to the struct
 
 
 

@@ -3,6 +3,8 @@
  *
  *  Created on: Sep 14, 2024
  *  Author: Mwangi Alex. W
+ * 
+ *  Defines all the functions that filter the sorted data by eliminating 50Hz power line interference
  */
 
 //INCLUSIONS
@@ -20,7 +22,7 @@ float32_t ADC1_IN1_coeffs[2 * NOOFCOEFFICIENTS] =
 
 float32_t ADC1_IN1_States[2 * NOOFS_VARIABLES] = {0.0f};  // Initialize state variables to 0
 
-ADC1_IN1_NF ADC1_IN1_NF_arg =
+ADC1_IN1_NF ADC1_IN1_NF_arg = // Initializes the struct declared in the header file
 	{
 	    .ADC1_IN1_numstages = 2,  // Number of stages in the biquad filter
 
@@ -247,7 +249,7 @@ extern ADC3_DMA_sort*ADC3_DMA_sort_ptr;
 void init_ADC1_IN1_struct(void)
   {
     //Ensure that ADC1_DMA_sort_ptr is initialized
-	ADC1_IN1_NF_arg.ADC1_IN1_psrc = (float32_t *)(ADC1_DMA_sort_ptr->ADC1_IN1_bfr);  // Typecasting. Assigned at runtime
+	ADC1_IN1_NF_arg.ADC1_IN1_psrc = (float32_t *)(ADC1_DMA_sort_ptr->ADC1_IN1_bfr);   // Typecasting. Converts the data in IN1 data buffer to floating point values. Assigns the source buffer at runtime
   }
 
 void init_ADC1_IN1_FO_biquad_filter(void)
