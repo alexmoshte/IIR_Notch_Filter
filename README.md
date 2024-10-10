@@ -1,2 +1,2 @@
-# IIR Notch Filters
+# IIR filters in MATLAB and arm cortex M4 MCUs
 Here I design, simulate and develop digital IIR notch filters for an STM32G4 MCU to attenuate 50Hz power line interference from the mains. The filters are intended for a multichannel biosignal data acquisition unit I designed in Flux. The article provided in this repo also outlines the design flow I adopted to design the filters and can be used to design, simulate and develop other types of digital IIR filters. The header files, .c files and MATLAB scripts I used to come up with the filters can also be found in this repo 
